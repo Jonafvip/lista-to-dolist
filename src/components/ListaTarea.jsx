@@ -1,4 +1,4 @@
-export const ListaTarea = () => {
+export const ListaTarea = ({ tareaSend }) => {
   return (
     <table
       className="table table-striped-columns mx-auto p-2"
@@ -13,16 +13,18 @@ export const ListaTarea = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>
-            <span>🗑️</span>
-          </td>
-        </tr>
+        {tareaSend.map((tarea) => (
+          <tr key={tarea.id}>
+            <th scope="row">{tarea.id}</th>
+            <td>{tarea.tarea}</td>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <span>🗑️</span>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
