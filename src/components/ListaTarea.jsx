@@ -1,4 +1,4 @@
-export const ListaTarea = ({ tareaSend }) => {
+export const ListaTarea = ({ tareaSend, handleDelete, accionCompletada }) => {
   return (
     <table
       className="table table-striped-columns mx-auto p-2"
@@ -6,22 +6,29 @@ export const ListaTarea = ({ tareaSend }) => {
     >
       <thead>
         <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Tarea</th>
           <th scope="col">Completado</th>
+          <th scope="col">Tarea</th>
           <th scope="col">Accion</th>
         </tr>
       </thead>
       <tbody>
         {tareaSend.map((tarea) => (
           <tr key={tarea.id}>
-            <th scope="row">{tarea.id}</th>
-            <td>{tarea.tarea}</td>
             <td>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={() => accionCompletada(tarea.id)}
+              />
+            </td>
+            <td
+              style={{
+                textDecoration: tarea.completada ? "line-through" : "none",
+              }}
+            >
+              {tarea.tarea}
             </td>
             <td>
-              <span>🗑️</span>
+              <button onClick={() => handleDelete(tarea.id)}>🗑️</button>
             </td>
           </tr>
         ))}

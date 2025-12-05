@@ -25,6 +25,20 @@ export const TareaItems = () => {
       completada: false,
     };
     setTareaSend([...tareaSend, nuevaTarea]);
+    setinputValue("");
+  };
+
+  const handleDelete = (idToDelte) => {
+    const deleteTarea = tareaSend.filter((tarea) => tarea.id !== idToDelte);
+    setTareaSend(deleteTarea);
+  };
+
+  const accionCompletada = (id) => {
+    setTareaSend(
+      tareaSend.map((tarea) =>
+        tarea.id === id ? { ...tarea, completada: !tarea.completada } : tarea
+      )
+    );
   };
 
   return (
@@ -34,7 +48,11 @@ export const TareaItems = () => {
         handleChange={handleChange}
         inputValue={inputValue}
       />
-      <ListaTarea tareaSend={tareaSend} />
+      <ListaTarea
+        tareaSend={tareaSend}
+        handleDelete={handleDelete}
+        accionCompletada={accionCompletada}
+      />
     </>
   );
 };
