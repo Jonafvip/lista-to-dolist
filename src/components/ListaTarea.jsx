@@ -1,3 +1,5 @@
+import { motion, AnimatePresence } from "framer-motion";
+
 export const ListaTarea = ({ tareaSend, handleDelete, accionCompletada }) => {
   return (
     <table
@@ -12,26 +14,39 @@ export const ListaTarea = ({ tareaSend, handleDelete, accionCompletada }) => {
         </tr>
       </thead>
       <tbody>
-        {tareaSend.map((tarea) => (
-          <tr key={tarea.id}>
-            <td>
-              <input
-                type="checkbox"
-                onChange={() => accionCompletada(tarea.id)}
-              />
-            </td>
-            <td
-              style={{
-                textDecoration: tarea.completada ? "line-through" : "none",
-              }}
+        <AnimatePresence>
+          {tareaSend.map((tarea) => (
+            <motion.tr
+              key={tarea.id}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3 }}
             >
-              {tarea.tarea}
-            </td>
-            <td>
-              <button onClick={() => handleDelete(tarea.id)}>🗑️</button>
-            </td>
-          </tr>
-        ))}
+              <td>
+                <input
+                  type="checkbox"
+                  onChange={() => accionCompletada(tarea.id)}
+                />
+              </td>
+              <td
+                style={{
+                  textDecoration: tarea.completada ? "line-through" : "none",
+                }}
+              >
+                {tarea.tarea}
+              </td>
+              <td>
+                <button
+                  onClick={() => handleDelete(tarea.id)}
+                  className="btn btn-danger"
+                >
+                  🗑️
+                </button>
+              </td>
+            </motion.tr>
+          ))}
+        </AnimatePresence>
       </tbody>
     </table>
   );

@@ -1,13 +1,17 @@
-import { InputTarea } from "./components/InputTarea";
-import { ListaTarea } from "./components/ListaTarea";
+import { motion } from "framer-motion";
 import { TareaItems } from "./components/TareaItems";
 
 function App() {
   return (
     <>
-      <h1 style={{ color: "white", textAlign: "center" }}>
+      <motion.h1
+        style={{ color: "white", textAlign: "center" }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         Lista de Tarea <span className="text-primary">TO-DOLIST</span>
-      </h1>
+      </motion.h1>
       <TareaItems />
     </>
   );

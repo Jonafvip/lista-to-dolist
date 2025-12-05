@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export const InputTarea = ({
   handleAgregarTarea,
   handleChange,
@@ -14,9 +16,14 @@ export const InputTarea = ({
         onChange={handleChange}
         value={inputValue}
       />
-      <button className="btn btn-primary" onClick={handleAgregarTarea}>
+      <motion.button
+        className="btn btn-primary"
+        onClick={handleAgregarTarea}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
         Agregar
-      </button>
+      </motion.button>
     </div>
   );
 };
